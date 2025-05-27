@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <h2>Welcome, Admin</h2>
+
+      <section style="margin-top: 30px">
+        <h3>Add New Staff Member</h3>
+        <form id="addUserForm">
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+          <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Service">Service</option>
+            <option value="Bar">Bar</option>
+          </select>
+          <input type="text" id="loginCode" placeholder="Login Code" required />
+          <button type="submit">Add Staff</button>
+          <div id="userMessage"></div>
+        </form>
+      </section>
+
+      <section style="margin-top: 40px">
+        <h3>Schedule Management</h3>
+        <p>staff schedules</p>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
