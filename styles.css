@@ -139,3 +139,9 @@ th {
   font-size: 14px;
   border-bottom: 1px solid #eee;
 }
+
+.dashboard-section {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}

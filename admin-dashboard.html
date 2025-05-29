@@ -3,14 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard – Pavarotti Drammen</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="main-container">
-      <h2>Welcome, Admin</h2>
+      <h2>Admin Dashboard</h2>
+      <p style="margin-bottom: 24px">Hello, Admin 👋</p>
 
-      <section style="margin-top: 30px">
+      <!-- Schedule Overview First -->
+      <section id="scheduleOverview">
+        <h3>Monthly Schedule Overview</h3>
+        <table style="width: 100%; border-collapse: collapse">
+          <thead>
+            <tr>
+              <th style="padding: 10px">Date</th>
+              <th style="padding: 10px">Day</th>
+              <th style="padding: 10px">Staff</th>
+              <th style="padding: 10px">Role</th>
+              <th style="padding: 10px">Time</th>
+            </tr>
+          </thead>
+          <tbody id="adminScheduleTable">
+            <!-- Example rows -->
+            <tr>
+              <td style="padding: 10px">2025-06-04</td>
+              <td style="padding: 10px">Tuesday</td>
+              <td style="padding: 10px">Laura B.</td>
+              <td style="padding: 10px">Service</td>
+              <td style="padding: 10px">17:00 – 22:00</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px">2025-06-05</td>
+              <td style="padding: 10px">Wednesday</td>
+              <td style="padding: 10px">Marco R.</td>
+              <td style="padding: 10px">Kitchen</td>
+              <td style="padding: 10px">16:00 – 21:00</td>
+            </tr>
+            <!-- To be filled from Airtable -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="button-group" style="margin-top: 40px">
+        <button onclick="showSection('assignShifts')">Add Shift</button>
+        <button onclick="showSection('addStaff')">Add Staff</button>
+        <button onclick="showSection('editSchedule')">Edit Schedule</button>
+      </div>
+
+      <!-- Hidden Tools -->
+      <section
+        id="assignShifts"
+        class="dashboard-section"
+        style="display: none"
+      >
+        <h3>Assign New Shift</h3>
+        <form id="assignShiftForm">
+          <select id="staffSelect" required>
+            <option value="">Select Staff Member</option>
+          </select>
+          <input type="date" id="shiftDate" required />
+          <input
+            type="text"
+            id="shiftTime"
+            placeholder="e.g. 17:00 – 22:00"
+            required
+          />
+          <select id="shiftRole" required>
+            <option value="">Select Role</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Service">Service</option>
+            <option value="Bar">Bar</option>
+          </select>
+          <button type="submit">Assign Shift</button>
+          <div id="shiftMessage"></div>
+        </form>
+      </section>
+
+      <section id="addStaff" class="dashboard-section" style="display: none">
         <h3>Add New Staff Member</h3>
         <form id="addUserForm">
           <input type="text" id="firstName" placeholder="First Name" required />
@@ -27,11 +98,27 @@
         </form>
       </section>
 
-      <section style="margin-top: 40px">
-        <h3>Schedule Management</h3>
-        <p>staff schedules</p>
+      <section
+        id="editSchedule"
+        class="dashboard-section"
+        style="display: none"
+      >
+        <h3>Edit Existing Schedule</h3>
+        <p>
+          Feature coming soon: Modify or delete assigned shifts directly from
+          the table above.
+        </p>
       </section>
     </div>
+
+    <script>
+      function showSection(sectionId) {
+        const sections = document.querySelectorAll(".dashboard-section");
+        sections.forEach((section) => {
+          section.style.display = section.id === sectionId ? "block" : "none";
+        });
+      }
+    </script>
 
     <script src="script.js"></script>
   </body>
