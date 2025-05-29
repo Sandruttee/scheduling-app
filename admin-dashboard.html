@@ -3,99 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard – Pavarotti Drammen</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="main-container">
-      <h2>Admin Dashboard</h2>
-      <p style="margin-bottom: 24px">Hello, Admin 👋</p>
+    <header class="top-nav">
+      <div class="nav-logo">Home</div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#" onclick="showSection('today')">Today's Schedule</a>
+        <a href="#" onclick="showSection('viewMonth')">View Month</a>
+        <a href="#" onclick="showSection('viewByStaff')">View by Staff</a>
+        <a href="#" onclick="showSection('addShift')">Add Shift</a>
+        <a href="#" onclick="showSection('addStaff')">Add Staff</a>
+        <a href="#" onclick="showSection('editSchedule')">Edit Schedule</a>
+      </nav>
+      <button class="hamburger" onclick="toggleNav()">☰</button>
+    </header>
 
-      <!-- Schedule Overview First -->
-      <section id="scheduleOverview">
-        <h3>Monthly Schedule Overview</h3>
-        <table style="width: 100%; border-collapse: collapse">
+    <main class="dashboard-content">
+      <h2>Admin Dashboard</h2>
+      <p id="currentDate"></p>
+
+      <section id="today" class="dashboard-section">
+        <h3>Today's Schedule</h3>
+        <table>
           <thead>
             <tr>
-              <th style="padding: 10px">Date</th>
-              <th style="padding: 10px">Day</th>
-              <th style="padding: 10px">Staff</th>
-              <th style="padding: 10px">Role</th>
-              <th style="padding: 10px">Time</th>
+              <th>Staff</th>
+              <th>Role</th>
+              <th>Time</th>
             </tr>
           </thead>
-          <tbody id="adminScheduleTable">
-            <!-- Example rows -->
+          <tbody>
             <tr>
-              <td style="padding: 10px">2025-06-04</td>
-              <td style="padding: 10px">Tuesday</td>
-              <td style="padding: 10px">Laura B.</td>
-              <td style="padding: 10px">Service</td>
-              <td style="padding: 10px">17:00 – 22:00</td>
+              <td>Marco R.</td>
+              <td>Kitchen</td>
+              <td>17:00 – 22:00</td>
             </tr>
             <tr>
-              <td style="padding: 10px">2025-06-05</td>
-              <td style="padding: 10px">Wednesday</td>
-              <td style="padding: 10px">Marco R.</td>
-              <td style="padding: 10px">Kitchen</td>
-              <td style="padding: 10px">16:00 – 21:00</td>
+              <td>Laura B.</td>
+              <td>Service</td>
+              <td>16:00 – 21:00</td>
             </tr>
-            <!-- To be filled from Airtable -->
           </tbody>
         </table>
       </section>
 
-      <!-- Action Buttons -->
-      <div class="button-group" style="margin-top: 40px">
-        <button onclick="showSection('assignShifts')">Add Shift</button>
-        <button onclick="showSection('addStaff')">Add Staff</button>
-        <button onclick="showSection('editSchedule')">Edit Schedule</button>
-      </div>
+      <section id="viewMonth" class="dashboard-section" style="display: none">
+        <h3>Monthly Schedule</h3>
+      </section>
 
-      <!-- Hidden Tools -->
-      <section
-        id="assignShifts"
-        class="dashboard-section"
-        style="display: none"
-      >
-        <h3>Assign New Shift</h3>
-        <form id="assignShiftForm">
-          <select id="staffSelect" required>
-            <option value="">Select Staff Member</option>
-          </select>
-          <input type="date" id="shiftDate" required />
-          <input
-            type="text"
-            id="shiftTime"
-            placeholder="e.g. 17:00 – 22:00"
-            required
-          />
-          <select id="shiftRole" required>
-            <option value="">Select Role</option>
-            <option value="Kitchen">Kitchen</option>
-            <option value="Service">Service</option>
-            <option value="Bar">Bar</option>
-          </select>
-          <button type="submit">Assign Shift</button>
-          <div id="shiftMessage"></div>
-        </form>
+      <section id="viewByStaff" class="dashboard-section" style="display: none">
+        <h3>Schedule by Staff</h3>
+      </section>
+
+      <section id="addShift" class="dashboard-section" style="display: none">
+        <h3>Add New Shift</h3>
       </section>
 
       <section id="addStaff" class="dashboard-section" style="display: none">
         <h3>Add New Staff Member</h3>
-        <form id="addUserForm">
-          <input type="text" id="firstName" placeholder="First Name" required />
-          <input type="text" id="lastName" placeholder="Last Name" required />
-          <select id="role" required>
-            <option value="">Select Role</option>
-            <option value="Kitchen">Kitchen</option>
-            <option value="Service">Service</option>
-            <option value="Bar">Bar</option>
-          </select>
-          <input type="text" id="loginCode" placeholder="Login Code" required />
-          <button type="submit">Add Staff</button>
-          <div id="userMessage"></div>
-        </form>
       </section>
 
       <section
@@ -103,23 +70,29 @@
         class="dashboard-section"
         style="display: none"
       >
-        <h3>Edit Existing Schedule</h3>
-        <p>
-          Feature coming soon: Modify or delete assigned shifts directly from
-          the table above.
-        </p>
+        <h3>Edit Schedule</h3>
       </section>
-    </div>
+    </main>
 
     <script>
-      function showSection(sectionId) {
+      function showSection(id) {
         const sections = document.querySelectorAll(".dashboard-section");
-        sections.forEach((section) => {
-          section.style.display = section.id === sectionId ? "block" : "none";
-        });
+        sections.forEach(
+          (sec) => (sec.style.display = sec.id === id ? "block" : "none")
+        );
       }
-    </script>
 
-    <script src="script.js"></script>
+      function toggleNav() {
+        document.getElementById("navLinks").classList.toggle("open");
+      }
+
+      document.getElementById("currentDate").textContent =
+        new Date().toLocaleDateString("en-GB", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+    </script>
   </body>
 </html>
