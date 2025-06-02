@@ -85,3 +85,71 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const adminCredentials = {
+    username: "admin",
+    password: "pass",
+  };
+
+  const adminLoginForm = document.getElementById("adminLoginForm");
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("adminUsername").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
+
+      if (
+        username === adminCredentials.username &&
+        password === adminCredentials.password
+      ) {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        document.getElementById("adminLoginMessage").textContent =
+          "❌ Invalid admin credentials.";
+      }
+    });
+  }
+});
+
+const staffLoginForm = document.getElementById("staffLoginForm");
+if (staffLoginForm) {
+  staffLoginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const username = document
+      .getElementById("staffUsername")
+      .value.trim()
+      .toLowerCase();
+    const code = document.getElementById("staffCode").value.trim();
+
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${STAFF_TABLE_NAME}?filterByFormula=AND(LOWER(Name)='${username}', {Login Code}='${code}')`;
+
+    try {
+      const res = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${AIRTABLE_TOKEN}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.records.length > 0) {
+        const record = data.records[0];
+        const staffName = record.fields.Name;
+        const staffId = record.id;
+
+        localStorage.setItem("staffName", staffName);
+        localStorage.setItem("staffId", staffId);
+
+        window.location.href = "staff-dashboard.html";
+      } else {
+        document.getElementById("staffLoginMessage").textContent =
+          "❌ Incorrect name or login code.";
+      }
+    } catch (err) {
+      document.getElementById("staffLoginMessage").textContent =
+        "❌ Error: " + err.message;
+    }
+  });
+}
