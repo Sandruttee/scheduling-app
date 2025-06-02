@@ -63,6 +63,19 @@
 
       <section id="addStaff" class="dashboard-section" style="display: none">
         <h3>Add New Staff Member</h3>
+        <form id="addUserForm">
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+          <select id="role" required>
+            <option value="">Select Role</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Service">Service</option>
+            <option value="Bar">Bar</option>
+          </select>
+          <input type="text" id="loginCode" placeholder="Login Code" required />
+          <button type="submit">Add Staff</button>
+          <div id="userMessage"></div>
+        </form>
       </section>
 
       <section
@@ -94,5 +107,6 @@
           day: "numeric",
         });
     </script>
+    <script src="script.js"></script>
   </body>
 </html>
