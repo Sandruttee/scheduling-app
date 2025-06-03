@@ -9,6 +9,7 @@
   <body>
     <header class="top-nav">
       <div class="nav-logo">Home</div>
+
       <nav class="nav-links" id="navLinks">
         <a href="#" onclick="showSection('today')">Today's Schedule</a>
         <a href="#" onclick="showSection('viewMonth')">View Month</a>
@@ -16,12 +17,15 @@
         <a href="#" onclick="showSection('addShift')">Add Shift</a>
         <a href="#" onclick="showSection('addStaff')">Add Staff</a>
         <a href="#" onclick="showSection('editSchedule')">Edit Schedule</a>
+        <a href="#" id="logoutBtn" class="nav-logout">Logout</a>
       </nav>
+
       <button class="hamburger" onclick="toggleNav()">☰</button>
     </header>
 
     <main class="dashboard-content">
       <h2>Admin Dashboard</h2>
+
       <p id="currentDate"></p>
 
       <section id="today" class="dashboard-section">

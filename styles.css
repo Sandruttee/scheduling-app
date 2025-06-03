@@ -206,3 +206,90 @@ td {
   border-bottom: 1px solid #eee;
   font-size: 15px;
 }
+
+.btn-logout {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  float: right;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  margin-top: -50px;
+}
+
+.btn-logout:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.nav-logout {
+  margin-left: auto;
+  font-weight: bold;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding-left: 16px;
+  color: var(--accent-color); /* Optional: Gold */
+}
+
+.nav-logout:hover {
+  text-decoration: underline;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 16px 24px;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.nav-links a,
+.nav-links span {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-logout {
+  margin-left: auto;
+  font-weight: bold;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding-left: 16px;
+  color: var(--accent-color);
+}
+
+.nav-logout:hover {
+  text-decoration: underline;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+}
+.nav-logout {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  font-weight: bold;
+  cursor: pointer;
+}
